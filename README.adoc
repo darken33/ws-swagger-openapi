@@ -1,0 +1,3 @@
+= ws_swagger_openapi
+
+Workshop autour de Swagger et OpenAPI

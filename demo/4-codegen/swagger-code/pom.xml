@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sqli.pbousquet.testapi</groupId>
+    <packaging>pom</packaging>
+    <artifactId>swagger-code</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+    <name>swagger-code</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <swagger-annotations-version>1.5.21</swagger-annotations-version>
+
+        <codegen.producer.inputSpec>${project.basedir}/contracts/producer</codegen.producer.inputSpec>
+        <codegen.producer.modelPackage>com.sqli.pbousquet.testapi.dto</codegen.producer.modelPackage>
+        <codegen.producer.apiPackage>com.sqli.pbousquet.testapi.api</codegen.producer.apiPackage>
+        <codegen.producer.generatorName>spring</codegen.producer.generatorName>
+        <codegen.producer.templateDirectory>templates/producer/spring</codegen.producer.templateDirectory>
+        <codegen.producer.library>spring-mvc</codegen.producer.library>
+        <codegen.producer.generateApiTests>false</codegen.producer.generateApiTests>
+        <codegen.producer.generateModelTests>false</codegen.producer.generateModelTests>
+        <codegen.producer.generateSupportingFiles>true</codegen.producer.generateSupportingFiles>
+        <codegen.producer.sourceFolder>src/main/java</codegen.producer.sourceFolder>
+        <codegen.producer.dateLibrary>java7</codegen.producer.dateLibrary>
+        <codegen.producer.java8>true</codegen.producer.java8>
+        <codegen.producer.interfaceOnly>true</codegen.producer.interfaceOnly>
+        <codegen.producer.hideGenerationTimestamp>false</codegen.producer.hideGenerationTimestamp>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations-version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>4.1.0</version>
+                <executions>
+                    <!-- Génération du code serveur des endpoints qu'on expose -->
+                    <execution>
+                        <id>1</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${codegen.producer.inputSpec}/hello.yaml</inputSpec>
+                            <generatorName>${codegen.producer.generatorName}</generatorName>
+                            <library>${codegen.producer.library}</library>
+                            <templateDirectory>${codegen.producer.templateDirectory}</templateDirectory>
+                            <generateApiTests>${codegen.producer.generateApiTests}</generateApiTests>
+                            <generateModelTests>${codegen.producer.generateModelTests}</generateModelTests>
+                            <generateSupportingFiles>${codegen.producer.generateSupportingFiles}</generateSupportingFiles>
+                            <configOptions>
+                                <useTags>true</useTags>
+                                <sourceFolder>${codegen.producer.sourceFolder}</sourceFolder>
+                                <dateLibrary>${codegen.producer.dateLibrary}</dateLibrary>
+                                <java8>${codegen.producer.java8}</java8>
+                                <interfaceOnly>${codegen.producer.interfaceOnly}</interfaceOnly>
+                                <hideGenerationTimestamp>${codegen.producer.hideGenerationTimestamp}</hideGenerationTimestamp>
+                            </configOptions>
+                            <apiPackage>${codegen.producer.apiPackage}</apiPackage>
+                            <modelPackage>${codegen.producer.modelPackage}</modelPackage>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>2</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${codegen.producer.inputSpec}/goodbye.yaml</inputSpec>
+                            <generatorName>${codegen.producer.generatorName}</generatorName>
+                            <library>${codegen.producer.library}</library>
+                            <templateDirectory>${codegen.producer.templateDirectory}</templateDirectory>
+                            <generateApiTests>${codegen.producer.generateApiTests}</generateApiTests>
+                            <generateModelTests>${codegen.producer.generateModelTests}</generateModelTests>
+                            <generateSupportingFiles>${codegen.producer.generateSupportingFiles}</generateSupportingFiles>
+                            <configOptions>
+                                <useTags>true</useTags>
+                                <sourceFolder>${codegen.producer.sourceFolder}</sourceFolder>
+                                <dateLibrary>${codegen.producer.dateLibrary}</dateLibrary>
+                                <java8>${codegen.producer.java8}</java8>
+                                <interfaceOnly>${codegen.producer.interfaceOnly}</interfaceOnly>
+                                <hideGenerationTimestamp>${codegen.producer.hideGenerationTimestamp}</hideGenerationTimestamp>
+                            </configOptions>
+                            <apiPackage>${codegen.producer.apiPackage}</apiPackage>
+                            <modelPackage>${codegen.producer.modelPackage}</modelPackage>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

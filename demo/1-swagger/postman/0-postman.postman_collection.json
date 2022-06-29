@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "70f4e92e-6893-437d-bcc5-c36d780598c9",
+		"name": "0-postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HelloAPI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://L540338:8080/api/v1/hello",
+					"protocol": "http",
+					"host": [
+						"L540338"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hello"
+					]
+				},
+				"description": "Hello World Simple"
+			},
+			"response": []
+		},
+		{
+			"name": "HelloAPI Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://L540338:8080/api/v1/hello",
+					"protocol": "http",
+					"host": [
+						"L540338"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hello"
+					]
+				},
+				"description": "Hello World Simple"
+			},
+			"response": []
+		},
+		{
+			"name": "HelloAPI Error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://L540338:8080/api/v1/hello/123",
+					"protocol": "http",
+					"host": [
+						"L540338"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hello",
+						"123"
+					]
+				},
+				"description": "Hello World Simple"
+			},
+			"response": []
+		},
+		{
+			"name": "GoodbyeAPI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://L540338:8080/api/v1/hello",
+					"protocol": "http",
+					"host": [
+						"L540338"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hello"
+					]
+				},
+				"description": "Goodbye World Simple"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
