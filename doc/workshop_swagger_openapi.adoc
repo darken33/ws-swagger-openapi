@@ -314,9 +314,9 @@ Aller plus loin dans la génération de code...
 
 https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo/4-codegen[Démo sous Git] 
 
-=== Les premiers pas du Design First chez Generali
+=== Les premiers pas du Design First chez un Client
 
-Nous avons poussé pour expérimenter le desgin d'API et la génération de code chez Generali, cependant nous ne voulions pas impacter l'ensemble du projet.
+Nous avons poussé pour expérimenter le desgin d'API et la génération de code chez un Client, cependant nous ne voulions pas impacter l'ensemble du projet.
 
 Nous avons donc créé un projet autonome qui ne rentrait pas dans le processus de PIC, il était utilisé pour générer manuellement au treavers de maven le code correspondant aux spécifications de nos API.
 
