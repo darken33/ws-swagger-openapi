@@ -432,7 +432,7 @@ https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo
 
 L'objectif ici n'est plus de générer le code, puis l'importer dans notre projet, mais de générer les sources directement dans la phase de build du projet.
 
-Il s'agit de l'étape suivante logique, une fois que la technique est suffisament éprouvée (cap  non encore franchit chez Generali)
+Il s'agit de l'étape suivante logique, une fois que la technique est suffisament éprouvée.
 
 === Étape 2 : Génération du code dans le cycle de dev 
 
