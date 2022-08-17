@@ -1,0 +1,50 @@
+package {{package}}.impl;
+
+import {{package}}.*;
+{{#imports}}import {{import}};
+{{/imports}}
+import org.springframework.stereotype.Service;
+
+{{#useSpringAnnotationConfig}}
+import org.springframework.stereotype.Service;
+{{/useSpringAnnotationConfig}}
+
+{{#useSpringAnnotationConfig}}
+@Service("{{classname}}")
+{{/useSpringAnnotationConfig}}
+{{#description}}
+{{/description}}
+
+{{#appName}}
+/**
+ * {{{appName}}}
+ *
+ {{#appDescription}}
+ * <p>{{{appDescription}}}
+ {{/appDescription}}
+ *
+ */
+{{/appName}}
+@Service
+public class {{classname}}ServiceImpl implements {{classname}} {
+{{#operations}}
+{{#operation}}
+    {{#summary}}
+    /**
+     * {{summary}}
+     *
+     {{#notes}}
+     * {{notes}}
+     *
+     {{/notes}}
+     */
+    {{/summary}}
+    public {{>returnTypes}} {{nickname}}({{#allParams}}{{>queryParamsImpl}}{{>pathParamsImpl}}{{>headerParamsImpl}}{{>bodyParamsImpl}}{{>formParamsImpl}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) {
+        // TODO: Implement...
+
+        {{#useGenericResponse}}return Response.ok().entity("magic!").build();{{/useGenericResponse}}{{^useGenericResponse}}{{^vendorExtensions.x-java-is-response-void}}return null;{{/vendorExtensions.x-java-is-response-void}}{{/useGenericResponse}}
+    }
+
+{{/operation}}
+}
+{{/operations}}
