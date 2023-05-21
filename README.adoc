@@ -7,4 +7,4 @@ L'objectif était d'initier mes collaborateur à Swagger et OpenAPI
 * demo/ : codes sources des démos
 * prez/ : présentation géérée (Reveal JS)
 
- 
+Présentation : https://tinyurl.com/ws-swagger-openapi
