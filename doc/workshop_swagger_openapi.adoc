@@ -26,14 +26,10 @@ La spécification OpenAPI (OAS) définit une description d'interface standard in
 |===
 *Version*; *Date*; *Notes*
 1.0; 	2011-08-10; 	First release of the Swagger Specification
-1.1; 	2012-08-22; 	Release of Swagger 1.1
-1.2; 	2014-03-14; 	Initial release of the formal document.
 2.0; 	2014-09-08; 	Release of Swagger 2.0
 2.0; 	2015-12-31; 	Donation of Swagger 2.0 to the OpenAPI Initiative
 3.0.0; 	2017-07-26; 	Release of the OpenAPI Specification 3.0.0
-3.0.1; 	2017-12-06; 	Patch release of the OpenAPI Specification 3.0.1
-3.0.2; 	2018-10-08; 	Patch release of the OpenAPI Specification 3.0.2
-3.0.3; 	2020-02-20; 	Patch release of the OpenAPI Specification 3.0.3
+3.1.0; 	2021-02-05; 	Last release of the OpenAPI Specification 3.1.0
 |===
 
 === Références
@@ -45,10 +41,11 @@ La spécification OpenAPI (OAS) définit une description d'interface standard in
 
 A l'époque des dinosaures...
 
-https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo/0-postman[Démo sous Git] 
+https://github.com/darken33/ws-swagger-openapi/tree/main/demo/0-postman[Démo sous Git] 
 
 === Étape 1 : On développe notre API 1/2
 
+[source, java]
 ----
 package com.sqli.pbousquet.testapi.api;
 
@@ -83,47 +80,64 @@ public class HelloAPI {
 }
 ----
 
-=== Étape 1 : On développe notre API 2/2
-
+[.notes]
+--
 Ici le developpeur a défini deux APIs : 
 
 * GET http://monserveur:monport/api/v1/hello : qui renverra "Hello World" 
 * GET http://monserveur:monport/api/v1/hello/{name} : qui renverra "Hello {name}" 
+--
 
 === Étape 2 : On compile, on exécute, on teste ????
 
-Par chance mon API est en *GET*, donc dans mon navigateur j'arrive à avoir mon résultat en tappant l'url http://localhost:8080/api/v1/hello
+http://localhost:8080/api/v1/hello
 
-image::imgs/001_navigateur.png[]
+image::imgs/001_navigateur.png[pdfwidth=50%,scaledwidth=50%]
 
-Mais comment tester les APIs en POST, PUT ou DELETE ?
+[%step]
+* Comment tester une API en POST, PUT ou DELETE ?
+
+[.notes]
+--
+* Par chance mon API est en *GET*, donc dans mon navigateur j'arrive à avoir mon résultat en tappant l'url http://localhost:8080/api/v1/hello
+* Mais comment tester les APIs en POST, PUT ou DELETE ?
+--
 
 === Étape 3 : Postman à la rescousse
 
-Postman est un outil permettant d'appeler des APIs (il existe d'autres outils, comme SOAP-UI).
+image::imgs/002_postman.png[width=800,pdfwidth=50%,scaledwidth=50%]
 
-image::imgs/002_postman.png[width=800]
+[.notes]
+--
+Postman est un outil permettant d'appeler des APIs (il existe d'autres outils, comme SOAP-UI).
+--
 
 === Problématique : Communiquer aux autres
 
-Maintenant, pour que d'autres puissent utiliser mon API il faut que je leur explique comment s'en servir : 
+Les consommateurs doivent connaitre : 
 
+[%step]
 * Les URIs exposées
 * Les Verbes à utiliser
 * Les paramètres
 * ...
 
-Généralement ceci était décrit dans un document Word (par exemple), mais les erreurs sont possibles (faute de frappe), et lorsqu'on fait évoluer l'API il faut penser à mettre à jour le document.
+[.notes]
+--
+* Maintenant, pour que d'autres puissent utiliser mon API il faut que je leur explique comment s'en servir. 
+* Généralement ceci était décrit dans un document Word (par exemple), mais les erreurs sont possibles (faute de frappe), et lorsqu'on fait évoluer l'API il faut penser à mettre à jour le document.
+--
 
 == Level 1 : Tester mon API via Swagger
 
 Offrir une UI pour tester les APIs (mais pas que)
 
-https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo/1-swagger[Démo sous Git] 
+https://github.com/darken33/ws-swagger-openapi/tree/main/demo/1-swagger[Démo sous Git] 
 
 === Étape 1 : Réferencer les dépendances swagger
 
 _Fichier pom.xml :_
+[source, xml]
 ----
 	<dependencies>
     [...]
@@ -150,9 +164,16 @@ _Fichier pom.xml :_
 	</dependencies>
 ----
 
+[.notes]
+--
+* On ajoute les dépendences springfox dans notre POM
+* À noter qu'aujourd'hui nous préfèrerons springdoc 
+--
+
 === Étape 2 : Configurer mon application
 
 _Fichier SwaggerConfig.java :_ 
+[source, java]
 ----
 package com.sqli.pbousquet.testapi.config;
 
@@ -182,28 +203,42 @@ public class SwaggerConfig {
 }
 ----
 
+[.notes]
+--
+* On ajoute un peu de configuration pour générer la page swagger-ui.
+--
+
 === Étape 3 : On compile, on exécute, on teste
 
-Swagger nous propose une simple interface, nous permettant de tester nos APIs en tappant l'url http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 image::imgs/003_swagger-ui.png[width=800]
 
+[.notes]
+--
+* Swagger nous propose une simple interface, nous permettant de tester nos APIs.
+--
+
 === Le petit plus : les spécifications
 
-L'autre avantage réside dans le fait qu'il est posible de récupérer les spécifications de nos APIs suivant la norme Swagger 2.0 (voire OpenAPI 3.0) au format Json.
-
-* Url : http://localhost:8080/v2/api-docs
+http://localhost:8080/v2/api-docs
 
 image::imgs/004_swagger-specs.png[width=600]
+
+[.notes]
+--
+L'autre avantage réside dans le fait qu'il est posible de récupérer les spécifications de nos APIs suivant la norme Swagger 2.0 (voire OpenAPI 3.0) au format Json.
+--
 
 == Level 2 : Documenter avec les Annotations
 
 Des annotations pour de la documentation enrichie...
 
-https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo/2-annotations[Démo sous Git] 
+https://github.com/darken33/ws-swagger-openapi/tree/main/demo/2-annotations[Démo sous Git] 
 
 === Étape 1 : Modifier la conf SwaggerConfig
 
+[source, java]
 ----
     @Bean
     public Docket api(ServletContext servletContext) {
@@ -225,6 +260,7 @@ IMPORTANT: Assurez vous d'avoir sélectionné _DocumentationType.SWAGGER_2_
 
 === Étape 2 : Ajouter des annotation sur vos API
 
+[source, java]
 ----
     @GetMapping(path = "/{name}")
     @ApiOperation(value = "Saluer une personne en particulier", 
@@ -241,62 +277,77 @@ IMPORTANT: Assurez vous d'avoir sélectionné _DocumentationType.SWAGGER_2_
         if (name != null) LOGGER.info("GET /api/v1/hello/"+name);
         HelloDto result = new HelloDto();
 [...]
+    }
 ----
 
 === Étape 3 : On compile, on exécute, on teste
 
-Nous pouvons remarquer que les annotations sont reportées sur l'interface http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 image::imgs/005_annotations.png[width=800]
 
+[.notes]
+--
+* Nous pouvons remarquer que les annotations sont reportées sur l'interface.
+--
+
 === Beaucoup d'annotations disponibles
 
-Les annotations disponibles sont sous le package io.swagger.annotations.* :
+package io.swagger.annotations.* :
 
+[%step]
 * Api
 * ApiOperation
 * ApiResponse
 * ApiParam
 * ...
 
-Module _swagger-annotations.jar_
-
 == Level 3 : SwaggerHub, définir et générer mon API
 
 Pemiers pas vers la génération de code... 
 
-https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo/3-swaggerhub[Démo sous Git] 
+https://github.com/darken33/ws-swagger-openapi/tree/main/demo/3-swaggerhub[Démo sous Git] 
 
 === Étape 1 : Décrire son API dans SwaggerHub
 
-Il est possible de définir ou importer des spécifications d'APIs dans une solution SaaS : https://app.swaggerhub.com/home
+https://app.swaggerhub.com/home
 
 image::imgs/006_swaggerhub.png[width=800]
 
 IMPORTANT: Ne pas utiliser cette solution en dehors de POC 
 
-=== Étape 2 : Générer le code (Server / Client)
+[.notes]
+--
+* Il est possible de définir ou importer des spécifications d'APIs dans une solution SaaS.
+--
 
-L'UI nous permet de générer des serveurs et clients pour divers langages (PHP, NodeJs, Python, Spring, JaxRs, ...)
+=== Étape 2 : Générer le code (Server / Client)
 
 image::imgs/007_swaggerhub-gen.png[width=800]
 
-=== Étape 3 : Implémenter le code
+[.notes]
+--
+L'UI nous permet de générer des serveurs et clients pour divers langages (PHP, NodeJs, Python, Spring, JaxRs, ...)
+--
 
-Il suffit alors dans son IDE d'implémenter le corps des méthodes...
+=== Étape 3 : Implémenter le code
 
 image::imgs/008_ide-dev.png[width=800]
 
+[.notes]
+--
+Il suffit alors dans son IDE d'implémenter le corps des méthodes...
+--
+
 === Étape 4 : On compile, on exécute, on teste
 
-Nous pouvons tester de la même manière : http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 image::imgs/009_tests.png[width=800]
 
 === Mais solution à éviter
 
-Bien qu'intéressant pour prendre en main la définition d'API, cette solution n'est cependant pas préconisée : 
-
+[%step]
 * La définition des API est stockée sur le net
 * Le code généré n'est pas très gracieux
 * Mélange entre génération et implémentation manuelle
@@ -308,20 +359,22 @@ Il existe un plugin pour IntelliJ :
 
 image::imgs/010_ide-plugin.png[width=800]
 
+[.notes]
+--
+Permet d'éviter de stocker la définition de son API sur SwaggerHub
+--
+
 == Level 4 : Définir et générer mon API (Maven, non intrusif)
 
 Aller plus loin dans la génération de code... 
 
-https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo/4-codegen[Démo sous Git] 
+https://github.com/darken33/ws-swagger-openapi/tree/main/demo/4-codegen[Démo sous Git] 
 
 === Les premiers pas du Design First chez un Client
 
-Nous avons poussé pour expérimenter le desgin d'API et la génération de code chez un Client, cependant nous ne voulions pas impacter l'ensemble du projet.
-
-Nous avons donc créé un projet autonome qui ne rentrait pas dans le processus de PIC, il était utilisé pour générer manuellement au treavers de maven le code correspondant aux spécifications de nos API.
-
 *Plugin Maven :* openapi-generator-maven-plugin
 
+[source, xml]
 ----
 <plugin>
     <groupId>org.openapitools</groupId>
@@ -333,22 +386,33 @@ Nous avons donc créé un projet autonome qui ne rentrait pas dans le processus 
 </plugin>
 ----
 
-=== Étape 1 : Designer l'API
+[.notes]
+--
+* Nous avons poussé pour expérimenter le desgin d'API et la génération de code chez un Client, cependant nous ne voulions pas impacter l'ensemble du projet.
+* Nous avons donc créé un projet autonome qui ne rentrait pas dans le processus de PIC, il était utilisé pour générer manuellement au treavers de maven le code correspondant aux spécifications de nos API.
+--
 
-Au travers d'IntelliJ nous pouvons éditer des fichiers Yaml
+=== Étape 1 : Designer l'API
 
 image::imgs/011_ide-yaml.png[width=800]
 
-=== Étape 2 : Prévisualiser l'API
+[.notes]
+--
+Au travers d'IntelliJ nous pouvons éditer des fichiers Yaml
+--
 
-On peut également prévisiualiser le résultat dans le navigateur
+=== Étape 2 : Prévisualiser l'API
 
 image::imgs/012_previsualiser.png[width=800]
 
+[.notes]
+--
+On peut également prévisiualiser le résultat dans le navigateur
+--
+
 === Étape 3 : Générer le code de l'API
 
-On définie une configuration par fichier YAML que l'on souhaite générer (dans le pom.xml) :
-
+[source, xml]
 ----
 <execution>
     <id>1</id>
@@ -377,16 +441,23 @@ On définie une configuration par fichier YAML que l'on souhaite générer (dans
 </execution>
 ----
 
-=== Étape 3 : Générer le code de l'API (2/2)
+[.notes]
+--
+On définie une configuration par fichier YAML que l'on souhaite générer (dans le pom.xml) :
+--
 
-Le code généré (Interfaces des APIs, Dto, Classes utilitaires) se trouve alors noté en tant que Generated Source, et peut être déplacé dans le projet réel :
+=== Étape 3 : Générer le code de l'API (2/2)
 
 image::imgs/013_generation.png[]
 
+[.notes]
+--
+Le code généré (Interfaces des APIs, Dto, Classes utilitaires) se trouve alors noté en tant que Generated Source, et peut être déplacé dans le projet réel.
+--
+
 === Étape 4 : Implémenter le code de l'API 
 
-On peut alors implémenter les classes HelloApiImpl et GoodbyeApiImpl.
-
+[source, java]
 ----
 package com.sqli.pbousquet.testapi.api.impl;
 
@@ -416,9 +487,14 @@ public class HelloApiImpl implements com.sqli.pbousquet.testapi.api.HelloApi {
 }
 ----
 
+[.notes]
+--
+On peut alors implémenter les classes HelloApiImpl et GoodbyeApiImpl.
+--
+
 === Étape 5 : On compile, on exécute, on teste
 
-Nous pouvons tester de la même manière : http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 image::imgs/014_codegen-test.png[width=800]
 
@@ -430,21 +506,27 @@ https://gitlab.bordeaux.sqli.com/pbousquet/ws_swagger_openapi/-/tree/master/demo
 
 === Étape 1 : Intégrer la génération dans le projet 
 
-L'objectif ici n'est plus de générer le code, puis l'importer dans notre projet, mais de générer les sources directement dans la phase de build du projet.
+IMPORTANT: Ne plus passer par un projet intermédiaire
 
-Il s'agit de l'étape suivante logique, une fois que la technique est suffisament éprouvée.
+[.notes]
+--
+* L'objectif ici n'est plus de générer le code, puis l'importer dans notre projet, mais de générer les sources directement dans la phase de build du projet.
+* Il s'agit de l'étape suivante logique, une fois que la technique est suffisament éprouvée.
+* On reprend les étapes (ajout du plugin et configuration maven) directement dans notre projet
+-- 
 
 === Étape 2 : Génération du code dans le cycle de dev 
 
-Le code généré (Interfaces des APIs, Dto, Classes utilitaires) se trouve alors noté en tant que Generated Source, directement dans le projet.
-
 image::imgs/015_generate_project.png[width=800]
 
-IMPORTANT: Nous ne passons donc plus par un projet intermédiaire
+[.notes]
+--
+Le code généré (Interfaces des APIs, Dto, Classes utilitaires) se trouve alors noté en tant que Generated Source, directement dans le projet.
+--
 
 === Étape 3 : On compile, on exécute, on teste
 
-Nous pouvons tester de la même manière : http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui.html
 
 image::imgs/016_generate-test.png[width=800]
 

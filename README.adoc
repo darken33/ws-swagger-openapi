@@ -1,3 +1,10 @@
 = ws_swagger_openapi
 
-Workshop autour de Swagger et OpenAPI
+Workshop autour de Swagger et OpenAPI du 16/07/2020.
+L'objectif était d'initier mes collaborateur à Swagger et OpenAPI
+
+* doc/ : source en asciidoc de la présentation
+* demo/ : codes sources des démos
+* prez/ : présentation géérée (Reveal JS)
+
+ 
