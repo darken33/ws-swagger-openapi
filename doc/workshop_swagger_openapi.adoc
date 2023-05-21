@@ -530,7 +530,12 @@ http://localhost:8080/swagger-ui.html
 
 image::imgs/016_generate-test.png[width=800]
 
-== Questions ?
+== Merci !
 
-image::imgs/questions.png[]
+image::imgs/profil-linkedin.png[width=480,align="right" float="right"]
 
+https://tinyurl.com/ws-swagger-openapi
+
+image::imgs/questions.png[width=256]
+
+*Gihtub :* @darken33
